@@ -37,6 +37,8 @@ To run the project in docker [Read this section](#DOCKER)
 For test the end points, use the file in the route with kulala:
 .src/test/java/com/co/manuel/hotel_spring/controllers/hotelRequest.http
 
+Configured swagger-ui in: http://localhost:8080/swagger-ui/index.html
+
 ## SEO
 
 N/A
