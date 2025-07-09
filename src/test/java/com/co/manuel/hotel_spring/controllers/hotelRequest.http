@@ -1,0 +1,29 @@
+### Get all guest
+GET http://localhost:4000/api/v1/guest
+
+### Create a guest
+POST http://localhost:4000/api/v1/guest
+Content-Type: application/json 
+
+{
+"firstName": "Manuel",
+"lastName": "Arias",
+"birthDay": "12/08/1985",
+"nationality":"Colombiano",
+"phone":"311144555"
+}
+
+### Update a guest
+PUT http://localhost:4000/api/v1/guest/edit/1
+Content-Type: application/json 
+
+{
+"firstName": "Manuel updated",
+"lastName": "Arias updated",
+"birthDay": "12/08/1985 updated",
+"nationality":"Colombiano updated",
+"phone":"311144555 updated"
+}
+
+### Delete a guest
+DELETE http://localhost:4000/api/v1/guest/delete/1
