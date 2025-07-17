@@ -1,4 +1,5 @@
 # hotel-spring - Java - Spring project
+
 REST API Hotel using Java and spring framework - web,jpa-data,lombok,h2,devtools
 
                ███╗░░░███╗░█████╗░███╗░░██╗██╗░░░██╗███████╗██╗░░░░░
@@ -11,19 +12,22 @@ REST API Hotel using Java and spring framework - web,jpa-data,lombok,h2,devtools
 ## Description
 
 Generate with Spring CLI.
+
 ```
     spring init -d=devtools,web,lombok,data-jpa,h2,devtools --build=maven --groupId=com.co.manuel --java-version=21 --name=hotel-spring --type=maven-project hotel-spring
 ```
 
 This app is to practice spring project in java and other tech stack.
 
-
 To run the project (or see the [Docker section](#DOCKER) in this file):
 Run with HOT reload (require devtools) -->
+
 ```
     SERVER_PORT=4000 mvn spring-boot:run
 ```
+
 Run with maven flat jar -->
+
 ```
     SERVER_PORT=4000 java -jar target/hotel-spring-0.0.1-SNAPSHOT.jar
 ```
@@ -31,6 +35,9 @@ Run with maven flat jar -->
 From console run: curl http://localhost:4000/api/v1/guest
 
 To run the project in docker [Read this section](#DOCKER)
+
+The banner was draw with:
+https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Manuel
 
 ## TESTING
 
@@ -90,4 +97,3 @@ docker run -dp 8080:80 --name react-ts-list-app manuelarias/react-ts-list:v2
 2. apk update
 3. apk add oci-cli
 4. oci -v
-
