@@ -41,6 +41,12 @@ https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Manuel
 
 ## TESTING
 
+To test a specific method -->
+
+```
+mvn -Dtest=com.co.manuel.hotel_spring.HotelSpringApplicationTests#getSpringVersion test
+```
+
 For test the end points, use the file in the route with kulala:
 .src/test/java/com/co/manuel/hotel_spring/controllers/hotelRequest.http
 
