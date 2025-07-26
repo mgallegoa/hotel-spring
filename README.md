@@ -51,6 +51,7 @@ For test the end points, use the file in the route with kulala:
 .src/test/java/com/co/manuel/hotel_spring/controllers/hotelRequest.http
 
 Configured swagger-ui in: http://localhost:8080/swagger-ui/index.html
+Configured api-docs show: http://localhost:8080/v3/api-docs/swagger-config
 
 ## SEO
 
