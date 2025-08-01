@@ -7,23 +7,43 @@ Content-Type: application/json
 
 {
 "firstName": "Manuel",
-"lastName": "Arias",
+"last_name": "Arias",
 "birthDay": "12/08/1985",
 "nationality":"Colombiano",
-"phone":"311144555"
+"phone":"311144555",
+"reservationsDto": [
+    {
+      "dateIn" : "2May",
+      "dateOut": "8May",
+      "payUsed":"CreditCard"
+    },
+    {
+      "dateIn" : "5August",
+      "dateOut": "25August",
+      "payUsed":"CreditCard"
+    }
+  ]
 }
 
 ### Update a guest
-PUT http://localhost:4000/api/v1/guest/edit/1
+PUT http://localhost:4000/api/v1/guest/edit/3
 Content-Type: application/json 
 
 {
 "firstName": "Manuel updated",
-"lastName": "Arias updated",
+"last_name": "Arias updated",
 "birthDay": "12/08/1985 updated",
 "nationality":"Colombiano updated",
-"phone":"311144555 updated"
+"phone":"311144555 updated",
+"reservationsDto": [
+    {
+      "id": 4,
+      "dateIn" : "5August Update",
+      "dateOut": "5August Updated",
+      "payUsed":"CreditCard Updated"
+    }
+  ]
 }
 
 ### Delete a guest
-DELETE http://localhost:4000/api/v1/guest/delete/1
+DELETE http://localhost:4000/api/v1/guest/delete/2
