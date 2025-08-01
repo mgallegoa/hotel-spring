@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.co.manuel.hotel_spring.dto.GuestDTO;
 import com.co.manuel.hotel_spring.service.GuestService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/v1/guest")
 public class GuestController {
@@ -31,12 +33,12 @@ public class GuestController {
   }
 
   @PostMapping
-  public GuestDTO createGuest(@RequestBody GuestDTO guestDto) {
+  public GuestDTO createGuest(@Valid @RequestBody GuestDTO guestDto) {
     return guestService.createGuest(guestDto);
   }
 
   @PutMapping("edit/{id}")
-  public GuestDTO updateGuest(@RequestBody GuestDTO guestDto, @PathVariable Long id) {
+  public GuestDTO updateGuest(@Valid @RequestBody GuestDTO guestDto, @PathVariable Long id) {
     return guestService.updateGuest(guestDto, id);
   }
 

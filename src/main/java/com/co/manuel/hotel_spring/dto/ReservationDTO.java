@@ -1,8 +1,10 @@
 package com.co.manuel.hotel_spring.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record ReservationDTO(
     Long id,
-    String dateIn,
-    String dateOut,
-    String costToPay) {
+    @NotBlank String dateIn,
+    @NotBlank String dateOut,
+    @NotBlank String costToPay) {
 }
