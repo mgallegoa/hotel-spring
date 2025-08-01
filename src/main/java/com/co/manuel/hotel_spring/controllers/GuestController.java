@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.co.manuel.hotel_spring.model.Guest;
+import com.co.manuel.hotel_spring.dto.GuestDTO;
 import com.co.manuel.hotel_spring.service.GuestService;
 
 @RestController
@@ -26,19 +26,18 @@ public class GuestController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public List<Guest> getAllGuest() {
+  public List<GuestDTO> getAllGuest() {
     return guestService.getAll();
   }
 
   @PostMapping
-  public Guest createGuest(@RequestBody Guest guest) {
-    return guestService.createGuest(guest);
+  public GuestDTO createGuest(@RequestBody GuestDTO guestDto) {
+    return guestService.createGuest(guestDto);
   }
 
   @PutMapping("edit/{id}")
-  public Guest updateGuest(@RequestBody Guest guest, @PathVariable Long id) {
-    guest.setIdGuest(id);
-    return guestService.updateGuest(guest);
+  public GuestDTO updateGuest(@RequestBody GuestDTO guestDto, @PathVariable Long id) {
+    return guestService.updateGuest(guestDto, id);
   }
 
   @DeleteMapping("delete/{id}")
