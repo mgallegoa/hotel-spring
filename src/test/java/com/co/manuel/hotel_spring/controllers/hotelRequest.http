@@ -8,19 +8,22 @@ Content-Type: application/json
 {
 "firstName": "Manuel",
 "last_name": "Arias",
-"birthDay": "12/08/1985",
+"birthDay": "12081985",
 "nationality":"Colombiano",
 "phone":"311144555",
 "reservationsDto": [
     {
       "dateIn" : "2May",
       "dateOut": "8May",
-      "payUsed":"CreditCard"
+      "payUsed":"CreditCard",
+      "costToPay": "100"
     },
     {
       "dateIn" : "5August",
       "dateOut": "25August",
-      "payUsed":"CreditCard"
+      "payUsed":"CreditCard",
+      "costToPay": "100"
+
     }
   ]
 }
@@ -32,7 +35,7 @@ Content-Type: application/json
 {
 "firstName": "Manuel updated",
 "last_name": "Arias updated",
-"birthDay": "12/08/1985 updated",
+"birthDay": "01011985",
 "nationality":"Colombiano updated",
 "phone":"311144555 updated",
 "reservationsDto": [
@@ -40,7 +43,8 @@ Content-Type: application/json
       "id": 4,
       "dateIn" : "5August Update",
       "dateOut": "5August Updated",
-      "payUsed":"CreditCard Updated"
+      "payUsed":"CreditCard Updated",
+      "costToPay": "200"
     }
   ]
 }
