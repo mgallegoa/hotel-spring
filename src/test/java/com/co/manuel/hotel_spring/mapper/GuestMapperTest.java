@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
+import com.co.manuel.hotel_spring.dto.ReservationDTO;
 import com.co.manuel.hotel_spring.model.Guest;
 import com.co.manuel.hotel_spring.model.Reservation;
 
@@ -22,6 +23,13 @@ public class GuestMapperTest {
   List<Reservation> reservations;
   Guest guest;
   List<Guest> guests;
+
+  // Dto
+  ReservationDTO reservationDto;
+  ReservationDTO reservationDto2;
+  List<ReservationDTO> reservationDtos;
+  GuestDTO guestDto;
+  List<GuestDTO> guestDtos;
 
   @BeforeAll
   public static void setupClass() {
@@ -39,6 +47,13 @@ public class GuestMapperTest {
     guest = new Guest(1L, "Manuel", "Arias", "12081985", "Colombiano", "311144555", reservations);
     guests = List.of(guest);
 
+    // Dto
+
+    reservationDto = new ReservationDTO(1L, "2May", "8May", "500");
+    reservationDto2 = new ReservationDTO(1L, "5August", "25August", "600");
+    reservationDtos = List.of(reservationDto, reservationDto2);
+    guestDto = new GuestDTO(1L, "Manuel", "Arias", "12081985", "Colombiano", reservationDtos);
+    guestDtos = List.of(guestDto);
   }
 
   @AfterEach
@@ -61,6 +76,25 @@ public class GuestMapperTest {
     assertNotNull(guestDTOs.get(0).reservationsDto());
     assertNotNull(guestDTOs.get(0).reservationsDto().get(0));
     assertEquals(guestDTOs.get(0).reservationsDto().get(0).dateIn(), guest.getReservations().get(0).getDateIn());
+
+  }
+
+  @Test
+  @DisplayName("Test for mapping custom Guest Entity from a Guest DTO.")
+  public void mappingCustomGuestFromGuestDto_test() {
+    // Guiven
+    // When
+    List<Guest> guests = guestDtos.stream()
+        .map(GuestMapper.INSTANCE::mapperCustomGuestFromGuestDto).toList();
+
+    // then
+    assertNotNull(guests);
+    assertNotNull(guests.get(0));
+    assertEquals(guests.get(0).getFirstName(), guest.getFirstName());
+    assertNotNull(guests.get(0).getReservations());
+    assertNotNull(guests.get(0).getReservations().get(0));
+    assertEquals(guests.get(0).getReservations().get(0).getDateIn(),
+        guestDto.reservationsDto().get(0).dateIn());
 
   }
 }
