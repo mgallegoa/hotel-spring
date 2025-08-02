@@ -1,6 +1,7 @@
 package com.co.manuel.hotel_spring.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
@@ -54,7 +55,12 @@ public class GuestMapperTest {
         .map(GuestMapper.INSTANCE::mapperCustomGuestDtoFromGuest).toList();
 
     // then
+    assertNotNull(guestDTOs);
+    assertNotNull(guestDTOs.get(0));
     assertEquals(guestDTOs.get(0).firstName(), guest.getFirstName());
+    assertNotNull(guestDTOs.get(0).reservationsDto());
+    assertNotNull(guestDTOs.get(0).reservationsDto().get(0));
+    assertEquals(guestDTOs.get(0).reservationsDto().get(0).dateIn(), guest.getReservations().get(0).getDateIn());
 
   }
 }
