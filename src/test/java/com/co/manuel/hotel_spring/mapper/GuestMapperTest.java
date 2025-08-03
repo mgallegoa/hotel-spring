@@ -2,6 +2,8 @@ package com.co.manuel.hotel_spring.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -96,5 +98,18 @@ public class GuestMapperTest {
     assertEquals(guests.get(0).getReservations().get(0).getDateIn(),
         guestDto.reservationsDto().get(0).dateIn());
 
+  }
+
+  @Test
+  @DisplayName("Test throw a null pointer exception trying Guest Entity from a Guest DTO.")
+  public void trowNullPointerExceptionGuestFromGuestDto_test() {
+    // Guiven
+    List<GuestDTO> guestDtosNull = List.of(new GuestDTO(0L, null, null, null, null, null));
+    // When
+    var message = assertThrows(NullPointerException.class, () -> guestDtosNull.stream()
+        .map(GuestMapper.INSTANCE::mapperCustomGuestFromGuestDto).toList());
+
+    // then
+    assertTrue(message.getMessage().contains("reservationsDto"));
   }
 }
