@@ -16,6 +16,12 @@ public class GuestService {
   @Autowired
   private GuestRepository guestRepository;
 
+  private GuestMapper guestMapper;
+
+  public GuestService(GuestMapper guestMapper) {
+    this.guestMapper = guestMapper;
+  }
+
   public List<GuestDTO> getAll() {
     List<Guest> guests = guestRepository.findAll();
     // List<GuestDTO> guestDTOs =
@@ -36,24 +42,25 @@ public class GuestService {
     // guest.getBirthDay(), guest.getNationality(), reservationDTOs);
     // return guestDTO;
     // }).toList();
+    //
 
     List<GuestDTO> guestDTOs = guests.stream()
-        .map(GuestMapper.INSTANCE::mapperCustomGuestDtoFromGuest).toList();
+        .map(guestMapper::mapperCustomGuestDtoFromGuest).toList();
 
     return guestDTOs;
   }
 
   public GuestDTO createGuest(GuestDTO guestDto) {
-    Guest guest = GuestMapper.INSTANCE.mapperCustomGuestFromGuestDto(guestDto);
+    Guest guest = guestMapper.mapperCustomGuestFromGuestDto(guestDto);
     guest = guestRepository.save(guest);
-    return GuestMapper.INSTANCE.mapperCustomGuestDtoFromGuest(guest);
+    return guestMapper.mapperCustomGuestDtoFromGuest(guest);
   }
 
   public GuestDTO updateGuest(GuestDTO guestDto, Long id) {
-    Guest guest = GuestMapper.INSTANCE.mapperCustomGuestFromGuestDto(guestDto);
+    Guest guest = guestMapper.mapperCustomGuestFromGuestDto(guestDto);
     guest.setIdGuest(id);
     guest = guestRepository.save(guest);
-    return GuestMapper.INSTANCE.mapperCustomGuestDtoFromGuest(guest);
+    return guestMapper.mapperCustomGuestDtoFromGuest(guest);
   }
 
   public void deleteGuest(Long id) {

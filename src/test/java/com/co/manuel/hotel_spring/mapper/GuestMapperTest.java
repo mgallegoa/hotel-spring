@@ -20,6 +20,8 @@ import com.co.manuel.hotel_spring.model.Reservation;
 
 public class GuestMapperTest {
 
+  private GuestMapper guestMapper;
+
   Reservation reservation;
   Reservation reservation2;
   List<Reservation> reservations;
@@ -69,7 +71,7 @@ public class GuestMapperTest {
     // Guiven
     // When
     List<GuestDTO> guestDTOs = guests.stream()
-        .map(GuestMapper.INSTANCE::mapperCustomGuestDtoFromGuest).toList();
+        .map(guestMapper::mapperCustomGuestDtoFromGuest).toList();
 
     // then
     assertNotNull(guestDTOs);
@@ -87,7 +89,7 @@ public class GuestMapperTest {
     // Guiven
     // When
     List<Guest> guests = guestDtos.stream()
-        .map(GuestMapper.INSTANCE::mapperCustomGuestFromGuestDto).toList();
+        .map(guestMapper::mapperCustomGuestFromGuestDto).toList();
 
     // then
     assertNotNull(guests);
@@ -107,7 +109,7 @@ public class GuestMapperTest {
     List<GuestDTO> guestDtosNull = List.of(new GuestDTO(0L, null, null, null, null, null));
     // When
     var message = assertThrows(NullPointerException.class, () -> guestDtosNull.stream()
-        .map(GuestMapper.INSTANCE::mapperCustomGuestFromGuestDto).toList());
+        .map(guestMapper::mapperCustomGuestFromGuestDto).toList());
 
     // then
     assertTrue(message.getMessage().contains("reservationsDto"));
