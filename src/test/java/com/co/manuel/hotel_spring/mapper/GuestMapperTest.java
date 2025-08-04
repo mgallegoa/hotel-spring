@@ -12,14 +12,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
 import com.co.manuel.hotel_spring.dto.ReservationDTO;
 import com.co.manuel.hotel_spring.model.Guest;
 import com.co.manuel.hotel_spring.model.Reservation;
 
+@SpringBootTest
 public class GuestMapperTest {
 
+  @Autowired
   private GuestMapper guestMapper;
 
   Reservation reservation;
