@@ -73,6 +73,9 @@ public class GuestServiceTest {
     assertEquals(guestDTO1.last_name(), guestDTO.last_name());
     assertEquals(guestDTO1.birthDay(), guestDTO.birthDay());
     assertEquals(guestDTO1.nationality(), guestDTO.nationality());
+    Mockito.verify(guestMapper, Mockito.times(1)).mapperCustomGuestFromGuestDto(guestDTO1);
+    Mockito.verify(guestRepository, Mockito.times(1)).save(guest1);
+    Mockito.verify(guestMapper, Mockito.times(1)).mapperCustomGuestDtoFromGuest(guest1);
 
   }
 
