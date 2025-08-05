@@ -8,11 +8,10 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
 import com.co.manuel.hotel_spring.dto.ReservationDTO;
@@ -21,10 +20,11 @@ import com.co.manuel.hotel_spring.model.Guest;
 import com.co.manuel.hotel_spring.model.Reservation;
 import com.co.manuel.hotel_spring.repository.GuestRepository;
 
-@SpringBootTest
+// @SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class GuestServiceTest {
 
-  @InjectMocks
+  // @InjectMocks
   private GuestService guestService;
 
   @Mock
@@ -40,7 +40,8 @@ public class GuestServiceTest {
 
   @BeforeEach
   public void setUpBeforeEach() {
-    MockitoAnnotations.openMocks(this);
+    // MockitoAnnotations.openMocks(this);
+    guestService = new GuestService(guestMapper, guestRepository);
     reservationDTOs = List.of(new ReservationDTO(1L, "14052025", "18052025", "200"));
     guestDTO1 = new GuestDTO(null, "Manuel", "Arias", "08121985", "Colombian", reservationDTOs);
     reservations = List.of(new Reservation(1L, "14052025", "18052025", 200, "Credit Card"));
