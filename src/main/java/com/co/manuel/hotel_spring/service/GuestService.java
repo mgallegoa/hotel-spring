@@ -2,6 +2,8 @@ package com.co.manuel.hotel_spring.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ public class GuestService {
 
   @Autowired
   private GuestRepository guestRepository;
+
+  private final static Logger LOGGER = LoggerFactory.getLogger(GuestService.class);
 
   private GuestMapper guestMapper;
 
@@ -51,6 +55,7 @@ public class GuestService {
   }
 
   public GuestDTO createGuest(GuestDTO guestDto) {
+    LOGGER.info("GuestService call to method createGuest");
     Guest guest = guestMapper.mapperCustomGuestFromGuestDto(guestDto);
     guest = guestRepository.save(guest);
     return guestMapper.mapperCustomGuestDtoFromGuest(guest);
