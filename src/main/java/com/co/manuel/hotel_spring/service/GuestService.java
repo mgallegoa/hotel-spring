@@ -15,15 +15,16 @@ import com.co.manuel.hotel_spring.repository.GuestRepository;
 @Service
 public class GuestService {
 
-  @Autowired
   private GuestRepository guestRepository;
 
   private final static Logger LOGGER = LoggerFactory.getLogger(GuestService.class);
 
   private GuestMapper guestMapper;
 
-  public GuestService(GuestMapper guestMapper) {
+  @Autowired
+  public GuestService(GuestMapper guestMapper, GuestRepository guestRepository) {
     this.guestMapper = guestMapper;
+    this.guestRepository = guestRepository;
   }
 
   public List<GuestDTO> getAll() {

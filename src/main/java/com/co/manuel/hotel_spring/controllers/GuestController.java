@@ -23,8 +23,12 @@ import jakarta.validation.Valid;
 @RequestMapping("api/v1/guest")
 public class GuestController {
 
-  @Autowired
   private GuestService guestService;
+
+  @Autowired
+  public GuestController(GuestService guestService) {
+    this.guestService = guestService;
+  }
 
   @GetMapping
   @ResponseStatus(HttpStatus.ACCEPTED)
@@ -33,6 +37,7 @@ public class GuestController {
   }
 
   @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public GuestDTO createGuest(@Valid @RequestBody GuestDTO guestDto) {
     return guestService.createGuest(guestDto);
   }
