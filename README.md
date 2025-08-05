@@ -65,11 +65,10 @@ N/A
 
 ## DOCKER
 
-Use the Dockerfile, this app run in the internal port 5174, use:
+Use the Docker to run the data bases Postgres and MySQL, use:
 
-1. docker build -t manuelarias/react-ts-list:v1 .
-2. docker run -dp 5555:5174 --name react-ts-list-app -v /media/manuel/Datos/mgallegoa/conceptsProbes/react-ts-list-app/src:/app/react-ts-list-app/src manuelarias/react-ts-list:v1
-3. docker exec -it react-ts-list-app bash
+1. docker run -dp 5432:5432 --name postgres -v /home/manuel/data:/var/lib/postgresql/data -e POSTGRES_USERNAME=postgres -e POSTGRES_PASSWORD=manuelpass postgres
+2. docker run -dp 3306:3306 --name mysql -v /home/manuel/data:/var/lib/mysql/data -e MYSQL_ROOT_PASSWORD=manuelpass mysql
 
 ## DOCKER - Compose
 
