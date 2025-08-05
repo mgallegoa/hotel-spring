@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -58,6 +59,21 @@ public class GuestControllerTest {
     // Then
 
     resultActions.andExpect(MockMvcResultMatchers.status().isCreated());
+
+  }
+
+  @Test
+  void GuestController_deleteGuest_Test() throws Exception {
+    // Given
+    Mockito.doNothing().when(guestService).deleteGuest(1L);
+
+    // When
+    ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/guest/delete/1")
+        .contentType(MediaType.APPLICATION_JSON));
+
+    // Then
+
+    resultActions.andExpect(MockMvcResultMatchers.status().isOk());
 
   }
 
