@@ -47,6 +47,12 @@ To test a specific method -->
 mvn -Dtest=com.co.manuel.hotel_spring.HotelSpringApplicationTests#getSpringVersion test
 ```
 
+To run with the test profile -->
+
+```
+mvn test -Dspring.profiles.active=test
+```
+
 For test the end points, use the file in the route with kulala:
 .src/test/java/com/co/manuel/hotel_spring/controllers/hotelRequest.http
 
