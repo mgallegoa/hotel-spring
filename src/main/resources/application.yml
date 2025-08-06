@@ -12,4 +12,4 @@ spring:
     console:
       enabled: true
   profiles:
-    active: dev
+    active: mysql
