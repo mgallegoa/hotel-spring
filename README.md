@@ -65,10 +65,13 @@ N/A
 
 ## DOCKER
 
+> [!TIP] To connect an existed container to a network use:
+> docker network connect hotel-network mysql
+
 Use the Docker to run the data bases Postgres and MySQL, use:
 
-1. docker run -dp 5432:5432 --name postgres -v /home/manuel/data:/var/lib/postgresql/data -e POSTGRES_USERNAME=postgres -e POSTGRES_PASSWORD=manuelpass postgres
-2. docker run -dp 3306:3306 --name mysql -v /home/manuel/data:/var/lib/mysql/data -e MYSQL_ROOT_PASSWORD=manuelpass mysql
+1. docker run -dp 5432:5432 --network hotel-network --name postgres -v /home/manuel/dataPostgres:/var/lib/postgresql/data -e POSTGRES_USERNAME=postgres -e POSTGRES_PASSWORD=manuelpass postgres
+2. docker run -dp 3306:3306 --network hotel-network --name mysql -v /home/manuel/dataMysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=manuelpass mysql
 
 ## DOCKER - Compose
 
