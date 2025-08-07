@@ -6,8 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.data.domain.Page;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
+import com.co.manuel.hotel_spring.dto.GuestDTOResponse;
 import com.co.manuel.hotel_spring.model.Guest;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -24,6 +26,8 @@ public abstract class GuestMapper extends AbstractGuestMapper {
   // @InheritInverseConfiguration
   // public abstract GuestDTO mapperGestDtoFromGuest(Guest guest);
 
-  abstract List<GuestDTO> mapperListGuestDtoFromGuest(List<Guest> listGuest);
+  public abstract List<GuestDTO> mapperListGuestDtoFromGuest(List<Guest> listGuest);
+
+  public abstract GuestDTOResponse mapperGuestDtoResponseFromPageGuest(Page<Guest> guests);
 
 }

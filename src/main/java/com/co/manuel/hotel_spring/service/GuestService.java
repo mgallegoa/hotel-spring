@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
+import com.co.manuel.hotel_spring.dto.GuestDTOResponse;
 import com.co.manuel.hotel_spring.mapper.GuestMapper;
 import com.co.manuel.hotel_spring.model.Guest;
 import com.co.manuel.hotel_spring.repository.GuestRepository;
@@ -57,10 +58,13 @@ public class GuestService {
     return guestDTOs;
   }
 
-  public Page<Guest> getAll(Pageable pageable) {
+  public GuestDTOResponse getAll(Pageable pageable) {
     Page<Guest> guests = guestRepository.findAll(pageable);
+    // List<GuestDTO> guestDTOs = guests.getContent().stream()
+    // .map(guestMapper::mapperCustomGuestDtoFromGuest).toList();
+    GuestDTOResponse guestsDTOsPage = guestMapper.mapperGuestDtoResponseFromPageGuest(guests);
 
-    return guests;
+    return guestsDTOsPage;
   }
 
   public GuestDTO createGuest(GuestDTO guestDto) {
