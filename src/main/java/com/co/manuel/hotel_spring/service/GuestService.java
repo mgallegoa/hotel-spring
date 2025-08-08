@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
@@ -60,11 +61,15 @@ public class GuestService {
 
   public GuestDTOResponse getAll(Pageable pageable) {
     Page<Guest> guests = guestRepository.findAll(pageable);
-    // List<GuestDTO> guestDTOs = guests.getContent().stream()
-    // .map(guestMapper::mapperCustomGuestDtoFromGuest).toList();
     GuestDTOResponse guestsDTOsPage = guestMapper.mapperGuestDtoResponseFromPageGuest(guests);
-
     return guestsDTOsPage;
+  }
+
+  public List<GuestDTO> getAllWithSorting(String field) {
+    List<Guest> guests = guestRepository.findAll(Sort.by(Sort.Direction.ASC, field));
+    List<GuestDTO> guestDTOs = guests.stream()
+        .map(guestMapper::mapperCustomGuestDtoFromGuest).toList();
+    return guestDTOs;
   }
 
   public GuestDTO createGuest(GuestDTO guestDto) {

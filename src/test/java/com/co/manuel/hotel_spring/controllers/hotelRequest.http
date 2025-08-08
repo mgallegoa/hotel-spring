@@ -1,6 +1,12 @@
 ### Get all guest
 GET http://localhost:4000/api/v1/guest
 
+### Get all guest
+GET http://localhost:4000/api/v1/guest/pageable?size=7&page=5&sort=idGuest
+
+### Get all guest
+GET http://localhost:4000/api/v1/guest/sorted?field=firstName
+
 ### Create a guest
 POST http://localhost:4000/api/v1/guest
 Content-Type: application/json 
