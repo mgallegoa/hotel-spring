@@ -2,6 +2,7 @@ package com.co.manuel.hotel_spring.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -12,8 +13,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.co.manuel.hotel_spring.dto.GuestDTO;
+import com.co.manuel.hotel_spring.dto.GuestDTOResponse;
 import com.co.manuel.hotel_spring.dto.ReservationDTO;
 import com.co.manuel.hotel_spring.mapper.GuestMapper;
 import com.co.manuel.hotel_spring.model.Guest;
@@ -37,6 +43,8 @@ public class GuestServiceTest {
   List<ReservationDTO> reservationDTOs;
   Guest guest1;
   List<Reservation> reservations;
+
+  Page<Guest> pageGuest;
 
   @BeforeEach
   public void setUpBeforeEach() {
@@ -77,6 +85,31 @@ public class GuestServiceTest {
     Mockito.verify(guestMapper, Mockito.times(1)).mapperCustomGuestFromGuestDto(guestDTO1);
     Mockito.verify(guestRepository, Mockito.times(1)).save(guest1);
     Mockito.verify(guestMapper, Mockito.times(1)).mapperCustomGuestDtoFromGuest(guest1);
+
+  }
+
+  @Test
+  public void getAllGuest_Test() {
+    Pageable pageable = PageRequest.of(0, 5);
+    List<Guest> guests = Arrays.asList(guest1);
+    pageGuest = new PageImpl<>(guests, pageable, 1);
+    GuestDTOResponse guestDTOResponseMapping = new GuestDTOResponse();
+    guestDTOResponseMapping.setContent(Arrays.asList(guestDTO1));
+
+    Mockito.when(guestRepository.findAll(pageable)).thenReturn(pageGuest);
+    Mockito.when(guestMapper.mapperGuestDtoResponseFromPageGuest(pageGuest)).thenReturn(guestDTOResponseMapping);
+
+    GuestDTOResponse guestDTOResponse = guestService.getAll(pageable);
+
+    Assertions.assertThat(guestDTOResponse).isNotNull();
+    Assertions.assertThat(guestDTOResponse.getContent()).isNotNull();
+    Assertions.assertThat(guestDTOResponse.getContent().get(0)).isNotNull();
+    Assertions.assertThat(guestDTOResponse.getContent().get(0).firstName()).isEqualTo(guest1.getFirstName());
+
+    Assertions.assertThat(guestDTOResponse.getContent().get(0).reservationsDto()).isNotNull();
+    Assertions.assertThat(guestDTOResponse.getContent().get(0).reservationsDto().get(0)).isNotNull();
+    Assertions.assertThat(guestDTOResponse.getContent().get(0).reservationsDto().get(0).dateIn())
+        .isEqualTo(reservations.get(0).getDateIn());
 
   }
 
