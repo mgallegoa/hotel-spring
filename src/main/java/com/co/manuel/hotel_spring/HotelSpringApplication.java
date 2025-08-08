@@ -1,5 +1,9 @@
 package com.co.manuel.hotel_spring;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +30,18 @@ public class HotelSpringApplication {
           .phone("311730")
           .build();
       repository.save(guest);
+
+      List<Guest> guests = IntStream.rangeClosed(2, 202)
+          .mapToObj(g -> Guest.builder()
+              .firstName("Manuel" + g)
+              .lastName("Test from command line" + g)
+              .birthDay("August" + g)
+              .nationality("Col" + g)
+              .phone("311730" + g)
+              .build())
+          .collect(Collectors.toList());
+
+      repository.saveAll(guests);
     };
   }
 
