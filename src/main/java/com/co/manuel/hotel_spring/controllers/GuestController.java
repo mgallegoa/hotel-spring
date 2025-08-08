@@ -42,7 +42,7 @@ public class GuestController {
 
   @GetMapping("pageable")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public GuestDTOResponse getAllGuest(@PageableDefault(size = 5, page = 0) Pageable pageable) {
+  public GuestDTOResponse getAllGuest(@PageableDefault(size = 5, page = 2, sort = "idGuest") Pageable pageable) {
     return guestService.getAll(pageable);
   }
 
