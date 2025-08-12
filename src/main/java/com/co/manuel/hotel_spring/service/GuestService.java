@@ -72,6 +72,12 @@ public class GuestService {
     return guestDTOs;
   }
 
+  public GuestDTOResponse getAllPageableWithSort(Pageable pageable, String field) {
+    Page<Guest> guests = guestRepository.findAll(pageable);
+    GuestDTOResponse guestsDTOsPage = guestMapper.mapperGuestDtoResponseFromPageGuest(guests);
+    return guestsDTOsPage;
+  }
+
   public GuestDTO createGuest(GuestDTO guestDto) {
     LOGGER.info("GuestService call to method createGuest");
     Guest guest = guestMapper.mapperCustomGuestFromGuestDto(guestDto);
