@@ -1,8 +1,10 @@
 package com.co.manuel.hotel_spring.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -43,6 +45,18 @@ public class GuestController {
   @GetMapping("pageable")
   @ResponseStatus(HttpStatus.ACCEPTED)
   public GuestDTOResponse getAllGuest(@PageableDefault(size = 5, page = 2, sort = "idGuest") Pageable pageable) {
+    return guestService.getAll(pageable);
+  }
+
+  @GetMapping("pageableNotDefault")
+  @ResponseStatus(HttpStatus.CREATED)
+  public GuestDTOResponse getAllGuest(@RequestParam Map<String, String> params) {
+    System.out.println(params);
+    System.out.println("size: " + params.get("size"));
+    int size = Integer.parseInt(params.get("size"));
+    System.out.println("page: " + params.get("page"));
+    int page = Integer.parseInt(params.get("page"));
+    Pageable pageable = PageRequest.of(page, size);
     return guestService.getAll(pageable);
   }
 

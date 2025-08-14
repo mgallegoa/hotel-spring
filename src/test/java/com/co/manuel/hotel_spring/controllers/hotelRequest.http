@@ -1,5 +1,5 @@
 ### Get all guest
-GET http://localhost:4000/api/v1/guest
+GET http://localhost:9000/api/v1/guest
 
 ### Get all guest
 GET http://localhost:9000/api/v1/guest/pageable?size=7&page=5&sort=idGuest,desc
@@ -8,16 +8,19 @@ GET http://localhost:9000/api/v1/guest/pageable?size=7&page=5&sort=idGuest,desc
 GET http://localhost:9000/api/v1/guest/pageable
 
 ### Get all guest
+GET http://localhost:9000/api/v1/guest/pageableNotDefault?size=7&page=5
+
+### Get all guest
 GET http://localhost:4000/api/v1/guest/sorted?field=firstName
 
 ### Create a guest
-POST http://localhost:4000/api/v1/guest
+POST http://localhost:9000/api/v1/guest
 Content-Type: application/json 
 
 {
 "firstName": "Manuel",
 "last_name": "Arias",
-"birthDay": "12081985",
+"birthDay": "120819s85",
 "nationality":"Colombiano",
 "phone":"311144555",
 "reservationsDto": [
