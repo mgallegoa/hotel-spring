@@ -26,7 +26,7 @@ import com.co.manuel.hotel_spring.service.GuestService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/guest")
+@RequestMapping("api/v1/guests")
 public class GuestController {
 
   private GuestService guestService;
