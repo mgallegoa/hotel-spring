@@ -53,6 +53,14 @@ To run with the test profile -->
 mvn test -Dspring.profiles.active=test
 ```
 
+```
+./gradlew test --args='--spring.profiles.active=test'
+
+or
+
+SPRING_PROFILES_ACTIVE=test ./gradlew test
+```
+
 For test the end points, use the file in the route with kulala:
 .src/test/java/com/co/manuel/hotel_spring/controllers/hotelRequest.http
 
