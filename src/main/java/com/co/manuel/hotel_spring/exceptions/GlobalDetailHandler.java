@@ -27,6 +27,11 @@ public class GlobalDetailHandler {
     return ResponseEntity.status(ex.getStatusCode()).body(problemDetailDTO);
   }
 
+  /**
+   * Throw when @Email in DTO is configured for the field.
+   * 
+   * @Valid
+   */
   @ExceptionHandler
   public ResponseEntity<ProblemDetailDTO> validationException(MethodArgumentNotValidException ex, WebRequest request) {
     List<String> errors = ex.getBindingResult().getFieldErrors().stream()
@@ -39,6 +44,13 @@ public class GlobalDetailHandler {
 
   }
 
+  /**
+   * Throw when, for example in the controller:
+   * public String getUser(@RequestParam @Min(1) int id) {
+   * and send id=0
+   *
+   * @Validated
+   */
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<ProblemDetailDTO> handleConstraintViolation(ConstraintViolationException ex,
       WebRequest request) {
