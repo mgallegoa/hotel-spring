@@ -1,6 +1,5 @@
 package com.co.manuel.hotel_spring.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -31,6 +30,6 @@ public class Guest {
   private String nationality;
   private String phone;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  private List<Reservation> reservations = new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Reservation> reservations;
 }
