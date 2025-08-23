@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +25,11 @@ import com.co.manuel.hotel_spring.dto.GuestDTOResponse;
 import com.co.manuel.hotel_spring.service.GuestService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 
 @RestController
 @RequestMapping("api/v1/guests")
+@Validated
 public class GuestController {
 
   private GuestService guestService;
@@ -73,12 +76,12 @@ public class GuestController {
   }
 
   @PutMapping("edit/{id}")
-  public GuestDTO updateGuest(@Valid @RequestBody GuestDTO guestDto, @PathVariable Long id) {
+  public GuestDTO updateGuest(@Valid @RequestBody GuestDTO guestDto, @Min(1) @PathVariable Long id) {
     return guestService.updateGuest(guestDto, id);
   }
 
   @DeleteMapping("delete/{id}")
-  public void deleteGuest(@PathVariable Long id) {
+  public void deleteGuest(@Min(1) @PathVariable Long id) {
     guestService.deleteGuest(id);
   }
 
