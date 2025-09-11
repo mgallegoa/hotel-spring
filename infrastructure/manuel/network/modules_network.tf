@@ -28,10 +28,23 @@ module "terraform-sg-ssh-http" {
 
   description         = "Security Group create with terraform manuel, enable ssh and http"
   vpc_id              = module.vpc.vpc_id
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["https-443-tcp", "http-80-tcp"]
+   # HTTP/HTTPS from everywhere
+  ingress_with_cidr_blocks = [
+    {
+      rule        = "http-80-tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      rule        = "https-443-tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      rule        = "ssh-tcp"
+      cidr_blocks = "0.0.0.0/0" # 203.0.113.25/32 in case to use only the IP for SSH
+    }
+  ]
   egress_cidr_blocks  = ["0.0.0.0/0"]
-  egress_rules        = ["https-443-tcp", "http-80-tcp"]
+  egress_rules        = ["ssh-tcp", "https-443-tcp", "http-80-tcp"]
 }
 
 module "terraform-sg-ssh" {
@@ -43,7 +56,7 @@ module "terraform-sg-ssh" {
   description         = "Security Group create with terraform manuel, enable ssh"
   vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["https-443-tcp"]
+  ingress_rules       = ["ssh-tcp"]
   egress_cidr_blocks  = ["0.0.0.0/0"]
-  egress_rules        = ["https-443-tcp"]
+  egress_rules        = ["ssh-tcp"]
 }

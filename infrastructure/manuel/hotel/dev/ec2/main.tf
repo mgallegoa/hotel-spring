@@ -19,7 +19,7 @@ resource "aws_instance" "hotel-instances-public-subnet" {
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnets[0]
   vpc_security_group_ids      = [data.terraform_remote_state.network.outputs.sg_web_id]
   associate_public_ip_address = true
-  key_name = "ssh-key-AWS-Instance-us-west-2-user-manuelarias-2025-08-30"
+  key_name = "ssh-key-AWS-Instance-us-east-2-user-manuelarias-2025-09-11"
 
   tags = {
     ExtraTag = local.instanse-public-tag
