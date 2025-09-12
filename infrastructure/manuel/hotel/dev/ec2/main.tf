@@ -2,6 +2,14 @@
 locals {
   instanse-public-tag  = "EC2 intance to develop"
   instanse-private-tag = "EC2 intance to data base"
+  instanse-user-data-install-docker = <<-EOF
+                                      #!/bin/bash
+                                      yum update -y
+                                      yum install -y docker
+                                      systemctl enable docker
+                                      systemctl start docker
+                                      usermod -aG docker ec2-user
+                                      EOF
 }
 
 data "terraform_remote_state" "network" {
@@ -19,7 +27,8 @@ resource "aws_instance" "hotel-instances-public-subnet" {
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnets[0]
   vpc_security_group_ids      = [data.terraform_remote_state.network.outputs.sg_web_id]
   associate_public_ip_address = true
-  key_name = "ssh-key-AWS-Instance-us-east-2-user-manuelarias-2025-09-11"
+  key_name                    = "ssh-key-AWS-Instance-us-east-2-user-manuelarias-2025-09-11"
+  user_data                   = local.instanse-user-data-install-docker
 
   tags = {
     ExtraTag = local.instanse-public-tag
@@ -36,6 +45,8 @@ resource "aws_instance" "hotel-instances-private-subnet" {
   subnet_id                   = data.terraform_remote_state.network.outputs.private_subnets[0]
   vpc_security_group_ids      = [data.terraform_remote_state.network.outputs.sg_db_id]
   associate_public_ip_address = false
+  key_name                    = "ssh-key-AWS-Instance-us-east-2-user-manuelarias-2025-09-11"
+  user_data                   = local.instanse-user-data-install-docker
 
   tags = {
     ExtraTag = local.instanse-private-tag
