@@ -1,6 +1,7 @@
 package com.co.manuel.hotel_spring.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +77,15 @@ public class GuestService {
     Page<Guest> guests = guestRepository.findAll(pageable);
     GuestDTOResponse guestsDTOsPage = guestMapper.mapperGuestDtoResponseFromPageGuest(guests);
     return guestsDTOsPage;
+  }
+
+  public GuestDTO getGuest(Long id) {
+    Optional<Guest> guest = guestRepository.findById(id);
+    GuestDTO guestDTO = null;
+    if (guest.isPresent()) {
+      guestDTO = guestMapper.mapperCustomGuestDtoFromGuest(guest.get());
+    }
+    return guestDTO;
   }
 
   public GuestDTO createGuest(GuestDTO guestDto) {

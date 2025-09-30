@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ import jakarta.validation.constraints.Min;
 @RestController
 @RequestMapping("api/v1/guests")
 @Validated
+@CrossOrigin(origins = "http://localhost:8080")
 public class GuestController {
 
   private GuestService guestService;
@@ -47,7 +49,7 @@ public class GuestController {
 
   @GetMapping("pageable")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public GuestDTOResponse getAllGuest(@PageableDefault(size = 5, page = 2, sort = "idGuest") Pageable pageable) {
+  public GuestDTOResponse getAllGuest(@PageableDefault(size = 10, page = 1, sort = "idGuest") Pageable pageable) {
     return guestService.getAll(pageable);
   }
 
@@ -67,6 +69,12 @@ public class GuestController {
   @ResponseStatus(HttpStatus.OK)
   public List<GuestDTO> getAllGuestWithSorting(@RequestParam String field) {
     return guestService.getAllWithSorting(field);
+  }
+
+  @GetMapping("/{id}")
+  public GuestDTO getGuest(@Min(1) @PathVariable Long id) throws Exception {
+    Thread.sleep(4000);
+    return guestService.getGuest(id);
   }
 
   @PostMapping

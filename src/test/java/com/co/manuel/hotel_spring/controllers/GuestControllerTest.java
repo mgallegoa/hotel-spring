@@ -52,7 +52,7 @@ public class GuestControllerTest {
     given(guestService.createGuest(ArgumentMatchers.any())).willReturn(guestDTO1);
 
     // When
-    ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/guest")
+    ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/guests")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(guestDTO1)));
 
@@ -65,10 +65,10 @@ public class GuestControllerTest {
   @Test
   void GuestController_deleteGuest_Test() throws Exception {
     // Given
-    Mockito.doNothing().when(guestService).deleteGuest(1L);
+    Mockito.doNothing().when(guestService).deleteGuest(2L);
 
     // When
-    ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/guest/delete/1")
+    ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/guests/delete/2")
         .contentType(MediaType.APPLICATION_JSON));
 
     // Then
