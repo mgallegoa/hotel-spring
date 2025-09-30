@@ -1,20 +1,20 @@
-### Get all guest
-GET http://localhost:9000/api/v1/guest
+### Get all guests
+GET http://localhost:3000/api/v1/guests
 
-### Get all guest
-GET http://localhost:9000/api/v1/guest/pageable?size=7&page=5&sort=idGuest,desc
+### Get all guests
+GET http://localhost:9000/api/v1/guests/pageable?size=7&page=5&sort=idGuest,desc
 
-### Get all guest
-GET http://localhost:9000/api/v1/guest/pageable
+### Get all guests
+GET http://localhost:9000/api/v1/guests/pageable
 
-### Get all guest
-GET http://localhost:9000/api/v1/guest/pageableNotDefault?size=7&page=5
+### Get all guests
+GET http://localhost:9000/api/v1/guests/pageableNotDefault?size=7&page=5
 
-### Get all guest
-GET http://localhost:4000/api/v1/guest/sorted?field=firstName
+### Get all guests
+GET http://localhost:4000/api/v1/guests/sorted?field=firstName
 
-### Create a guest
-POST http://localhost:9000/api/v1/guest
+### Create a guests
+POST http://localhost:9000/api/v1/guests
 Content-Type: application/json 
 
 {
@@ -40,8 +40,8 @@ Content-Type: application/json
   ]
 }
 
-### Update a guest
-PUT http://localhost:4000/api/v1/guest/edit/3
+### Update a guests
+PUT http://localhost:4000/api/v1/guests/edit/3
 Content-Type: application/json 
 
 {
@@ -61,5 +61,5 @@ Content-Type: application/json
   ]
 }
 
-### Delete a guest
-DELETE http://localhost:4000/api/v1/guest/delete/2
+### Delete a guests
+DELETE http://localhost:4000/api/v1/guests/delete/2
