@@ -41,12 +41,38 @@ module "terraform-sg-ssh-http" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
+      from_port   = 8081
+      to_port     = 8081
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
       rule        = "ssh-tcp"
       cidr_blocks = "0.0.0.0/0" # 203.0.113.25/32 in case to use only the IP for SSH
     }
   ]
-  egress_cidr_blocks = ["0.0.0.0/0"]
-  egress_rules       = ["ssh-tcp", "https-443-tcp", "http-80-tcp"]
+  # egress_cidr_blocks = ["0.0.0.0/0"]
+  # egress_rules       = ["ssh-tcp", "https-443-tcp", "http-80-tcp"]
+  egress_with_cidr_blocks = [
+    {
+      rule        = "http-80-tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      rule        = "https-443-tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 8081
+      to_port     = 8081
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      rule        = "ssh-tcp"
+      cidr_blocks = "0.0.0.0/0" # 203.0.113.25/32 in case to use only the IP for SSH
+    }
+  ]
 }
 
 module "terraform-sg-ssh" {
@@ -59,8 +85,8 @@ module "terraform-sg-ssh" {
   vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["ssh-tcp"]
-  
+
   # outbound everything
-  egress_cidr_blocks  = ["0.0.0.0/0"]
-  egress_rules        = ["all-all"]
+  egress_cidr_blocks = ["0.0.0.0/0"]
+  egress_rules       = ["all-all"]
 }
